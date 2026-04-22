@@ -87,7 +87,11 @@ export default function App() {
       )}
 
       {currentPage === 'discovery' && (
-        <DoctorDiscovery onNavigate={handleNavigate} />
+        <DoctorDiscovery
+          onNavigate={handleNavigate}
+          onLoginSuccess={handleLoginSuccess}
+          loggedInUser={loggedInUser}
+        />
       )}
 
       {currentPage === 'patient-dashboard' && loggedInUser && (
