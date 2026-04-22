@@ -155,6 +155,13 @@ def register_appointment_routes(app):
                 "message": "Appointment is already cancelled"
             }), 400
 
+        if appointment["status"] == "Completed":
+            conn.close()
+            return jsonify({
+                "success": False,
+                "message": "Completed appointments cannot be cancelled"
+            }), 400
+
         cursor.execute("""
             UPDATE appointments
             SET status = 'Cancelled'
@@ -174,6 +181,50 @@ def register_appointment_routes(app):
         return jsonify({
             "success": True,
             "message": "Appointment cancelled successfully"
+        })
+
+    @app.route("/api/appointments/<int:appointment_id>/complete", methods=["POST"])
+    def complete_appointment(appointment_id):
+        conn = get_db()
+        cursor = conn.cursor()
+
+        appointment = cursor.execute("""
+            SELECT * FROM appointments WHERE id = ?
+        """, (appointment_id,)).fetchone()
+
+        if not appointment:
+            conn.close()
+            return jsonify({
+                "success": False,
+                "message": "Appointment not found"
+            }), 404
+
+        if appointment["status"] == "Completed":
+            conn.close()
+            return jsonify({
+                "success": False,
+                "message": "Appointment is already completed"
+            }), 400
+
+        if appointment["status"] == "Cancelled":
+            conn.close()
+            return jsonify({
+                "success": False,
+                "message": "Cancelled appointments cannot be completed"
+            }), 400
+
+        cursor.execute("""
+            UPDATE appointments
+            SET status = 'Completed'
+            WHERE id = ?
+        """, (appointment_id,))
+
+        conn.commit()
+        conn.close()
+
+        return jsonify({
+            "success": True,
+            "message": "Appointment marked as completed"
         })
 
     @app.route("/api/patient/<int:patient_id>/appointments", methods=["GET"])
