@@ -3,21 +3,7 @@ import { Homepage } from './components/Homepage';
 import { DoctorDiscovery } from './components/DoctorDiscovery';
 import { PatientDashboard } from './components/PatientDashboard';
 import { DoctorDashboard } from './components/DoctorDashboard';
-
-function AdminDashboard({ user, onLogout }: any) {
-  return (
-    <div className="p-10">
-      <h1 className="text-3xl font-bold mb-4">Admin Dashboard</h1>
-      <p className="mb-4">Welcome, {user.name}</p>
-      <button
-        onClick={onLogout}
-        className="px-4 py-2 bg-red-500 text-white rounded-lg"
-      >
-        Logout
-      </button>
-    </div>
-  );
-}
+import { AdminDashboard } from './components/AdminDashboard';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home');
