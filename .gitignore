@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.env
+
+# Flask / local DB
+*.db
+instance/
+
+# Frontend
+node_modules/
+dist/
+.vite/
+
+# OS files
+.DS_Store
+EOF 
+git init
+git branch -M main 
+git add .
+git status 
+
