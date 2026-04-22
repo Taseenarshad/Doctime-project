@@ -118,6 +118,7 @@ interface DoctorDiscoveryProps {
   onNavigate: (page: string) => void;
   onLoginSuccess: (role: string, user: any) => void;
   loggedInUser: any;
+  onBookingSuccess: () => void;
 }
 
 interface BookingModalProps {
@@ -125,6 +126,7 @@ interface BookingModalProps {
   onClose: () => void;
   doctor: Doctor | null;
   loggedInUser: any;
+  onBookingSuccess: () => void;
 }
 
 function BookingModal({
@@ -132,6 +134,7 @@ function BookingModal({
   onClose,
   doctor,
   loggedInUser,
+  onBookingSuccess,
 }: BookingModalProps) {
   const [slots, setSlots] = useState<AvailabilitySlot[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
@@ -226,11 +229,11 @@ function BookingModal({
       }
 
       setSuccessMessage('Appointment booked successfully');
-      setSlots((prevSlots) =>
-        prevSlots.filter((slot) => slot.id !== selectedSlotId)
-      );
-      setSelectedSlotId(null);
-      setNotes('');
+
+      setTimeout(() => {
+        onClose();
+        onBookingSuccess();
+      }, 1000);
     } catch (error) {
       setErrorMessage('Could not connect to backend');
     } finally {
@@ -365,6 +368,7 @@ export function DoctorDiscovery({
   onNavigate,
   onLoginSuccess,
   loggedInUser,
+  onBookingSuccess,
 }: DoctorDiscoveryProps) {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [selectedSpecialty, setSelectedSpecialty] = useState('');
@@ -433,7 +437,6 @@ export function DoctorDiscovery({
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <button
@@ -476,7 +479,6 @@ export function DoctorDiscovery({
         </div>
       </header>
 
-      {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -505,7 +507,6 @@ export function DoctorDiscovery({
           </div>
         )}
 
-        {/* Specialty Grid */}
         <div className="grid grid-cols-4 gap-6 mb-12">
           {SPECIALTIES.map((specialty) => {
             const Icon = specialty.icon;
@@ -537,7 +538,6 @@ export function DoctorDiscovery({
           })}
         </div>
 
-        {/* Results Section */}
         <section>
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -645,7 +645,6 @@ export function DoctorDiscovery({
         </section>
       </main>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white mt-16">
         <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-4 gap-8">
@@ -718,19 +717,18 @@ export function DoctorDiscovery({
         </div>
       </footer>
 
-      {/* Login Modal */}
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
         onLoginSuccess={onLoginSuccess}
       />
 
-      {/* Booking Modal */}
       <BookingModal
         isOpen={!!bookingDoctor}
         onClose={() => setBookingDoctor(null)}
         doctor={bookingDoctor}
         loggedInUser={loggedInUser}
+        onBookingSuccess={onBookingSuccess}
       />
     </div>
   );

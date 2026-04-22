@@ -662,5 +662,49 @@ def get_patient_appointments(patient_id):
         "appointments": appointment_list
     })
 
+@app.route("/api/appointments/<int:appointment_id>/cancel", methods=["POST"])
+def cancel_appointment(appointment_id):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    appointment = cursor.execute("""
+        SELECT * FROM appointments WHERE id = ?
+    """, (appointment_id,)).fetchone()
+
+    if not appointment:
+        conn.close()
+        return jsonify({
+            "success": False,
+            "message": "Appointment not found"
+        }), 404
+
+    if appointment["status"] == "Cancelled":
+        conn.close()
+        return jsonify({
+            "success": False,
+            "message": "Appointment is already cancelled"
+        }), 400
+
+    cursor.execute("""
+        UPDATE appointments
+        SET status = 'Cancelled'
+        WHERE id = ?
+    """, (appointment_id,))
+
+    if appointment["availability_id"]:
+        cursor.execute("""
+            UPDATE availability
+            SET is_booked = 0
+            WHERE id = ?
+        """, (appointment["availability_id"],))
+
+    conn.commit()
+    conn.close()
+
+    return jsonify({
+        "success": True,
+        "message": "Appointment cancelled successfully"
+    })
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
