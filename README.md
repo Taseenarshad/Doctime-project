@@ -1,204 +1,177 @@
-# DocTime — Team Setup Guide
+# DocTime – Full Stack Healthcare Appointment System
 
-Welcome to the **DocTime** project. Follow these steps to run the application locally and contribute to development.
+## 📌 Project Overview
 
----
+DocTime is a full-stack web application that allows patients to:
 
-## Project Overview
+* Search for doctors
+* Book appointments
+* Message doctors
+* Manage profile settings
 
-DocTime is a healthcare appointment platform with:
+The system also includes:
 
-* User registration & login
-* Role-based access (Patient / Doctor / Admin)
-* Doctor discovery by specialty
-* Availability scheduling
-* Appointment booking
-* Patient dashboard
-
----
-
-## Project Structure
-
-```text
-Doctime-project/
-├── backend/              # Flask backend API
-├── Frontend/frontend/    # React + Vite frontend
-```
+* Doctor dashboard (manage appointments, patients, availability)
+* Admin dashboard (manage users, doctors, appointments)
 
 ---
 
-## Prerequisites
+## ⚙️ Requirements
 
-Install the following before starting:
+Before running the project, make sure the following are installed:
 
-* Python 3
-* Node.js
-* npm
+* Java 17
+* Node.js (v16 or higher) must be installed 
+* npm  (comes with Node.js)
 
-Check installation:
+You can verify installations using:
 
-```bash
-python3 --version
+java -version
 node -v
 npm -v
+
+---
+
+## 🚀 How to Run the Project
+
+### 🔹 Step 1 – Run Backend
+
+Make sure you are inside the correct folder before running commands.
+Navigate to the project folder (where the Doctime folder is located):
+
+Open a terminal:
+
+```bash
+cd Doctime/backend-java
+./mvnw spring-boot:run
+```
+
+On Windows:
+
+```bash
+mvnw.cmd spring-boot:run
+```
+
+Backend will run at:
+
+```
+http://localhost:8080
 ```
 
 ---
 
-## 1. Clone the Repository
+### 🔹 Step 2 – Run Frontend
+
+Open a **new terminal**:
 
 ```bash
-git clone https://github.com/Taseenarshad/Doctime-project.git
-cd Doctime-project
-```
-
----
-
-## 2. Run the Backend
-
-Open **Terminal #1**
-
-```bash
-cd backend
-python3 app.py
-```
-
-Backend runs at:
-
-```text
-http://127.0.0.1:5000
-```
-
----
-
-## 3. Run the Frontend
-
-Open **Terminal #2**
-
-```bash
-cd Frontend/frontend
-npm install
+cd Doctime/frontend
+npm install  (**MUST RUN THIS**)
 npm run dev
 ```
 
-Frontend runs at:
+Frontend will run at:
 
-```text
+```
 http://localhost:5173
 ```
 
-Open that link in your browser.
-
 ---
 
-## 4. Seed Test Data
+### 🔹 Step 3 – Open Application
 
-After the backend is running, open another terminal.
+Open your browser and go to:
 
-### Seed Doctors
-
-```bash
-curl -X POST http://127.0.0.1:5000/api/seed-doctors
 ```
-
-### Seed Availability Slots
-
-```bash
-curl -X POST http://127.0.0.1:5000/api/seed-availability
+http://localhost:5173
 ```
 
 ---
 
-## 5. Test Accounts
+## 🔐 Test Accounts
 
-Create accounts through the website signup/login page.
+### 👤 Patient Account
 
-Available roles:
-
-* Patient
-* Doctor
-* Admin
+* Email: `patient@test.com`
+* Password: `123456`
+* Role: Patient
 
 ---
 
-## 6. How to Use the App
+### 🛠️ Admin Account
 
-1. Start backend
-2. Start frontend
-3. Open website
-4. Register or log in
-5. Browse doctors
-6. Book appointments
+* Email: `admin@test.com`
+* Password: `123456`
+* Role: Admin
 
 ---
 
-## GitHub Team Workflow
+### 🩺 Doctor Accounts
 
-### Before Starting Work
+Use any of the following doctor accounts to access the Doctor Dashboard:
 
-```bash
-git pull
+| Name                | Email                                                             |
+| ------------------- | ----------------------------------------------------------------- |
+| Dr. Sarah Johnson   | [sarah.johnson@doctime.com](mailto:sarah.johnson@doctime.com)     |
+| Dr. Michael Chen    | [michael.chen@doctime.com](mailto:michael.chen@doctime.com)       |
+| Dr. Emily Rodriguez | [emily.rodriguez@doctime.com](mailto:emily.rodriguez@doctime.com) |
+| Dr. David Patel     | [david.patel@doctime.com](mailto:david.patel@doctime.com)         |
+| Dr. Laura Smith     | [laura.smith@doctime.com](mailto:laura.smith@doctime.com)         |
+| Dr. James Walker    | [james.walker@doctime.com](mailto:james.walker@doctime.com)       |
+| Dr. Nina Brooks     | [nina.brooks@doctime.com](mailto:nina.brooks@doctime.com)         |
+| Dr. Olivia Turner   | [olivia.turner@doctime.com](mailto:olivia.turner@doctime.com)     |
+| Dr. Ethan Murphy    | [ethan.murphy@doctime.com](mailto:ethan.murphy@doctime.com)       |
+| Dr. Sophia Bennett  | [sophia.bennett@doctime.com](mailto:sophia.bennett@doctime.com)   |
+| Dr. Marcus Reed     | [marcus.reed@doctime.com](mailto:marcus.reed@doctime.com)         |
+| Dr. Priya Nair      | [priya.nair@doctime.com](mailto:priya.nair@doctime.com)           |
+
+* Password (for all doctors): `123456`
+* Role: Doctor
+
+
+### You are also able to create any account using the "Sign up" button beside Log in. 
+ (Doesn't have to be real email or password)
+---
+
+## 🧠 Notes
+
+* The system uses an **H2 in-memory database**, so:
+
+  * No database installation is required
+  * Data resets every time the backend is restarted
+  * Test data is automatically loaded
+
+* If the frontend does not load correctly:
+
+  * Ensure both backend and frontend are running
+
+---
+
+## 🧪 Optional: H2 Database Console
+
+You can view the database at:
+
+```
+http://localhost:8080/h2-console
 ```
 
-### After Making Changes
+Use the following settings:
 
-```bash
-git add .
-git commit -m "Describe your changes"
-git push
-```
+* JDBC URL: `jdbc:h2:mem:doctime`
+* Username: `sa`
+* Password: (leave blank)
 
 ---
 
-## Troubleshooting
+## 📦 Submission Notes
 
-### npm command not found
+* This project is designed to run locally using:
 
-Install Node.js:
+  * Spring Boot (backend)
+  * React + Vite (frontend)
 
-https://nodejs.org
-
-### Port already in use
-
-Close old backend/frontend terminals and restart.
-
-### Changes not showing
-
-Make sure frontend terminal is running:
-
-```bash
-npm run dev
-```
+* No code changes are required to run on another machine
 
 ---
 
-## Current Development Status
-
-Completed:
-
-* Authentication system
-* Doctor discovery
-* Availability system
-* Booking system
-* Patient dashboard
-
-In Progress:
-
-* Doctor dashboard
-* Admin dashboard
-* Notifications
-* Medical records
-
----
-
-## Notes for Team Members
-
-Please pull latest changes before working to avoid conflicts.
-
-Use clear commit messages.
-
-Example:
-
-```bash
-git commit -m "Added patient dashboard UI"
-```
+## ✅ End of Setup

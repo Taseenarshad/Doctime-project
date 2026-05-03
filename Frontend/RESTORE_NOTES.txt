@@ -1,0 +1,8 @@
+Recovered frontend from uploaded Doctime-project-main.zip.
+Included newer uploaded components: AboutPage, MessagesPage, updated dashboards, updated App.tsx, updated vite.config.ts, and added PatientProfileSettings.
+
+Run:
+npm install
+npm run dev
+
+Backend expected at http://127.0.0.1:8080 through Vite proxy.
