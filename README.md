@@ -1,48 +1,102 @@
-# DocTime – Full Stack Healthcare Appointment System
+# DocTime — Healthcare Appointment Management System
 
-## 📌 Project Overview
+DocTime is a full-stack healthcare appointment management application built with **React, Java Spring Boot, and H2**. The platform provides dedicated functionality for patients, doctors, and administrators to manage the appointment process through role-specific dashboards.
 
-DocTime is a full-stack web application that allows patients to:
+## Key Features
 
-* Search for doctors
-* Book appointments
-* Message doctors
-* Manage profile settings
+### Patient
 
-The system also includes:
+- Search and discover doctors
+- Book appointments based on doctor availability
+- View and manage appointments
+- Message doctors
+- Manage profile settings
+- Create a patient account through the sign-up system
 
-* Doctor dashboard (manage appointments, patients, availability)
-* Admin dashboard (manage users, doctors, appointments)
+### Doctor
 
----
+- Access a dedicated doctor dashboard
+- View and manage appointments
+- Manage patient information
+- Create and manage availability
+- Monitor scheduled appointments
 
-## ⚙️ Requirements
+### Admin
 
-Before running the project, make sure the following are installed:
+- Access a centralized administration dashboard
+- Manage users
+- Manage doctors
+- Manage appointments
+- View system-level information
 
-* Java 17
-* Node.js (v16 or higher) must be installed 
-* npm  (comes with Node.js)
+## Tech Stack
 
-You can verify installations using:
+### Frontend
 
+- React
+- Vite
+- JavaScript
+
+### Backend
+
+- Java 17
+- Spring Boot
+- Spring Data JPA
+
+### Database
+
+- H2 in-memory database
+
+## Application Architecture
+
+```text
+React + Vite Frontend
+        |
+        | HTTP Requests
+        v
+Java Spring Boot Backend
+        |
+        | JPA
+        v
+   H2 Database
+```
+
+The frontend runs independently from the Spring Boot backend. Application data is managed through the H2 in-memory database.
+
+## Project Structure
+
+```text
+Doctime/
+├── backend-java/    # Java Spring Boot backend
+├── frontend/        # React + Vite frontend
+├── README.md
+└── Part I Doctime.docx
+```
+
+## Requirements
+
+Before running DocTime, install:
+
+- Java 17
+- Node.js 16 or newer
+- npm
+
+Verify the installations:
+
+```bash
 java -version
 node -v
 npm -v
+```
 
----
+## Running the Application
 
-## 🚀 How to Run the Project
+### 1. Start the Backend
 
-### 🔹 Step 1 – Run Backend
-
-Make sure you are inside the correct folder before running commands.
-Navigate to the project folder (where the Doctime folder is located):
-
-Open a terminal:
+From the DocTime project directory:
 
 ```bash
-cd Doctime/backend-java
+cd backend-java
 ./mvnw spring-boot:run
 ```
 
@@ -52,126 +106,104 @@ On Windows:
 mvnw.cmd spring-boot:run
 ```
 
-Backend will run at:
+The backend runs at:
 
-```
+```text
 http://localhost:8080
 ```
 
----
+### 2. Start the Frontend
 
-### 🔹 Step 2 – Run Frontend
-
-Open a **new terminal**:
+Open another terminal and navigate to the frontend:
 
 ```bash
-cd Doctime/frontend
-npm install  (**MUST RUN THIS**)
+cd frontend
+npm install
 npm run dev
 ```
 
-Frontend will run at:
+The frontend runs at:
 
-```
+```text
 http://localhost:5173
 ```
 
----
+Open `http://localhost:5173` in a browser to access DocTime.
 
-### 🔹 Step 3 – Open Application
+## Test Accounts
 
-Open your browser and go to:
+### Patient
 
-```
-http://localhost:5173
-```
+- **Email:** `patient@test.com`
+- **Password:** `123456`
+- **Role:** Patient
 
----
+### Administrator
 
-## 🔐 Test Accounts
+- **Email:** `admin@test.com`
+- **Password:** `123456`
+- **Role:** Admin
 
-### 👤 Patient Account
+### Doctor Accounts
 
-* Email: `patient@test.com`
-* Password: `123456`
-* Role: Patient
+The application includes multiple seeded doctor accounts for testing:
 
----
+| Doctor | Email |
+| --- | --- |
+| Dr. Sarah Johnson | `sarah.johnson@doctime.com` |
+| Dr. Michael Chen | `michael.chen@doctime.com` |
+| Dr. Emily Rodriguez | `emily.rodriguez@doctime.com` |
+| Dr. David Patel | `david.patel@doctime.com` |
+| Dr. Laura Smith | `laura.smith@doctime.com` |
+| Dr. James Walker | `james.walker@doctime.com` |
+| Dr. Nina Brooks | `nina.brooks@doctime.com` |
+| Dr. Olivia Turner | `olivia.turner@doctime.com` |
+| Dr. Ethan Murphy | `ethan.murphy@doctime.com` |
+| Dr. Sophia Bennett | `sophia.bennett@doctime.com` |
+| Dr. Marcus Reed | `marcus.reed@doctime.com` |
+| Dr. Priya Nair | `priya.nair@doctime.com` |
 
-### 🛠️ Admin Account
+**Doctor password:** `123456`
 
-* Email: `admin@test.com`
-* Password: `123456`
-* Role: Admin
+Users can also create an account through the application's sign-up functionality.
 
----
+## H2 Database
 
-### 🩺 Doctor Accounts
+DocTime uses an **H2 in-memory database**, allowing the application to run without installing a separate database server.
 
-Use any of the following doctor accounts to access the Doctor Dashboard:
+Because the database is stored in memory:
 
-| Name                | Email                                                             |
-| ------------------- | ----------------------------------------------------------------- |
-| Dr. Sarah Johnson   | [sarah.johnson@doctime.com](mailto:sarah.johnson@doctime.com)     |
-| Dr. Michael Chen    | [michael.chen@doctime.com](mailto:michael.chen@doctime.com)       |
-| Dr. Emily Rodriguez | [emily.rodriguez@doctime.com](mailto:emily.rodriguez@doctime.com) |
-| Dr. David Patel     | [david.patel@doctime.com](mailto:david.patel@doctime.com)         |
-| Dr. Laura Smith     | [laura.smith@doctime.com](mailto:laura.smith@doctime.com)         |
-| Dr. James Walker    | [james.walker@doctime.com](mailto:james.walker@doctime.com)       |
-| Dr. Nina Brooks     | [nina.brooks@doctime.com](mailto:nina.brooks@doctime.com)         |
-| Dr. Olivia Turner   | [olivia.turner@doctime.com](mailto:olivia.turner@doctime.com)     |
-| Dr. Ethan Murphy    | [ethan.murphy@doctime.com](mailto:ethan.murphy@doctime.com)       |
-| Dr. Sophia Bennett  | [sophia.bennett@doctime.com](mailto:sophia.bennett@doctime.com)   |
-| Dr. Marcus Reed     | [marcus.reed@doctime.com](mailto:marcus.reed@doctime.com)         |
-| Dr. Priya Nair      | [priya.nair@doctime.com](mailto:priya.nair@doctime.com)           |
+- Test data is automatically loaded when the application starts.
+- Data resets when the backend is restarted.
+- No external database installation is required.
 
-* Password (for all doctors): `123456`
-* Role: Doctor
+### H2 Console
 
+The H2 database console is available at:
 
-### You are also able to create any account using the "Sign up" button beside Log in. 
- (Doesn't have to be real email or password)
----
-
-## 🧠 Notes
-
-* The system uses an **H2 in-memory database**, so:
-
-  * No database installation is required
-  * Data resets every time the backend is restarted
-  * Test data is automatically loaded
-
-* If the frontend does not load correctly:
-
-  * Ensure both backend and frontend are running
-
----
-
-## 🧪 Optional: H2 Database Console
-
-You can view the database at:
-
-```
+```text
 http://localhost:8080/h2-console
 ```
 
 Use the following settings:
 
-* JDBC URL: `jdbc:h2:mem:doctime`
-* Username: `sa`
-* Password: (leave blank)
+```text
+JDBC URL: jdbc:h2:mem:doctime
+Username: sa
+Password: [leave blank]
+```
 
----
+## Future Improvements
 
-## 📦 Submission Notes
+Potential improvements include:
 
-* This project is designed to run locally using:
+- Persistent production database
+- Enhanced authentication and authorization
+- Appointment reminders and notifications
+- Expanded doctor-patient messaging
+- Deployment to a cloud environment
+- Improved responsive/mobile support
 
-  * Spring Boot (backend)
-  * React + Vite (frontend)
+## Project Purpose
 
-* No code changes are required to run on another machine
-
----
-
-## ✅ End of Setup
+DocTime was developed as a full-stack software project to demonstrate the integration of a modern frontend, REST-based backend, relational data management, and role-based application functionality in a healthcare appointment system.
